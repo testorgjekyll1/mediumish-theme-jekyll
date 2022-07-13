@@ -17,12 +17,8 @@ title: Home
 
         {% if post.featured == true %}
 
-        {% for post in posts limit:2 %}
-
             {% include featuredbox.html %}
 
-            {% endfor %}
-            
         {% endif %}
 
     {% endfor %}
