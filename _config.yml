@@ -33,7 +33,8 @@ authors:
   test:
     name: Test
     display_name: Test
-    
+    avatar: 'assets/images/avatartest.png'
+
 # Plugins
 plugins:
   - jekyll-paginate
