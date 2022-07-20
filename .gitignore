@@ -2,6 +2,7 @@ _site
 .DS_Store
 *.swp
 .sass-cache
+.jekyll-cache
 *~
 .jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/fe/30030e102ecf8fab72edd523758d54b314224d81ef9f50265efeac824fb56e
 .jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/fd/e56ed22e8fdea8ad6bd2b80e843d23163c2edc87cc0a746e0555aa1ddaeb72
