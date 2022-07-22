@@ -103,6 +103,10 @@ section.recent-posts {
         padding-left: 0.8rem;
     }
 }
+.listrecent .card-group:hover{
+    transform: translate(0,-10px);
+    transition: 1s ease-in-out;
+}
 
 .listfeaturedtag {
     border: 1px solid rgba(0, 0, 0, .125);
