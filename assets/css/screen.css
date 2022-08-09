@@ -10,6 +10,15 @@ License: https://www.wowthemes.net/freebies-license/
 .mainheading {
     padding: 1rem 0rem;
 }
+.text-gradient-purple-coral {
+    background: -webkit-linear-gradient(-70deg,#8250df 0%,#d42a32 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: rgba(0,0,0,0);
+    -webkit-box-decoration-break: clone;
+    font-size: 17px;
+    font-weight: 600;
+}
 
 a {
     color: #00ab6b;

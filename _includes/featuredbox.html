@@ -1,59 +1,137 @@
-<!-- begin post -->
-{% assign author = site.authors[post.author] %}
-<div class="col-md-6 mb-30px">
-    <div class="listfeaturedtag h-100">
-        <div class="row h-100">
-            <div class="col-12 col-md-12 col-lg-5 pr-lg-0">
-                <div class="h-100">
-                    <div class="wrapthumbnail">
-                        <a href="{{ site.baseurl }}{{ post.url }}">
-                            {% if site.lazyimages == "enabled" %}
-                            <img class="featured-box-img-cover lazyimg"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="{% if post.image contains "://" %}{{ post.image }}{% else %}{{ site.baseurl }}/{{ post.image }}{% endif %}">
-                            {% else %}
-                            <img class="featured-box-img-cover" src="{% if post.image contains "://" %}{{ post.image }}{% else %}{{ site.baseurl }}/{{ post.image }}{% endif %}">
-                            {% endif %}
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-12 col-lg-7" style="padding-left: 0px;">
-                <div class="h-100 card-group">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2 class="card-title">
-                                <a class="text-dark" href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-                                {% if post.rating %}
-                                <div class="mb-2 mt-2 font-weight-normal">
-                                {% include star_rating_postbox.html %}
-                                </div>
-                                {% endif %}
-                            </h2>
+<!-- Begin post excerpts, let's highlight the first 4 posts on top -->
+<div class="row remove-site-content-margin">
 
-                            <h4 class="card-text">{{ post.excerpt | strip_html | truncatewords:25 }}</h4>
-                        </div>
-                        <div class="card-footer b-0 bg-white mt-auto">
-                            <div class="wrapfooter">
-                                {% if post.author %}
-                                <span class="meta-footer-thumb">
-                                {% if author.avatar %}
-                                <img class="author-thumb" src="{{site.baseurl}}/{{ author.avatar }}" alt="{{ author.display_name }}">
-                                {% else %}
-                                <img class="author-thumb" src="https://www.gravatar.com/avatar/{{ author.gravatar }}?s=250&d=mm&r=x" alt="{{ author.display_name }}">
-                                {% endif %}
-                                </span>
-                                <span class="author-meta">
-                                <span class="post-name"><a target="_blank" href="{{ author.web }}">{{ author.display_name }}</a></span><br/>
-                                {% endif %}
-                                <span class="post-date">{{ post.date | date_to_string }}</span>
-                                </span>
-                                <span class="post-read-more"><a href="{{ site.baseurl }}/{{ post.url }}" title="Read Story"><svg class="svgIcon-use" width="25" height="25" viewbox="0 0 25 25"><path d="M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6zm-6.838 9.97L7 19.636V6c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v13.637l-5.162-3.668a.49.49 0 0 0-.676 0z" fill-rule="evenodd"></path></svg></a></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </div>
+    <!-- latest post -->
+    {% assign latest_post = site.posts[0] %}
+    <div class="col-md-7">
+        <div class="card border-0 mb-4 box-shadow pb-3"
+            style="border-bottom: 1px solid rgba(0, 0, 0, .125) !important;">
+            <a href="{{site.baseurl}}{{latest_post.url}}">
+                <div class="topfirstimage" style="background-image: url({% if latest_post.image contains " ://" %}{{
+                    latest_post.image }}{% else %} {{site.baseurl}}/{{ latest_post.image}}{% endif %}); height: 245px;
+                    background-size: cover; background-repeat: no-repeat;"></div>
+            </a>
+            <div class="card-body px-0 pb-0 d-flex flex-column align-items-start">
+                <small class="d-block text-gradient-purple-coral">
+                    In <span class="catlist">
+                        {% for category in latest_post.categories %}
+                        <a class="text-capitalize text-muted smoothscroll"
+                            href="{{site.baseurl}}/categories.html#{{ category | downcase }}">{{ category }}</a><span
+                            class="">, </span>
+                        {% endfor %}
+                    </span>
+                </small>
+                <h2 class="h4 font-weight-bold">
+                    <a class="text-dark" href="{{site.baseurl}}{{latest_post.url}}">{{ latest_post.title }}</a>
+                </h2>
+                <p class="excerpt">
+                    {{ latest_post.excerpt | strip_html | strip_newlines | truncate: 136 }}
+                </p>
+                <div>
+
+                    <small class="text-muted">
+                        {{ latest_post.date | date: '%b %d, %Y' }}
+                    </small>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="col-md-5">
+
+        <!-- second latest post -->
+        {%- assign second_post = site.posts[1] -%}
+        <div class="mb-3 d-flex align-items-center pb-4" style="border-bottom: 1px solid rgba(0, 0, 0, .125);">
+            {% if second_post.image %}
+            <div class="col-md-4">
+                <a href="{{site.baseurl}}{{second_post.url}}">
+                    <img class="w-100" src="{% if second_post.image contains " ://" %}{{ second_post.image }}{% else
+                        %}{{ second_post.image | absolute_url }}{% endif %}" alt="{{ second_post.title }}">
+                </a>
+            </div>
+            {% endif %}
+            <div>
+                <small class=" text-gradient-purple-coral">
+                    In <span class="catlist">
+                        {% for category in second_post.categories %}
+                        <a class="text-capitalize text-muted smoothscroll"
+                            href="{{site.baseurl}}/categories.html#{{ category | downcase }}">{{ category }}</a><span
+                            class="">, </span>
+                        {% endfor %}
+                    </span>
+                </small>
+                <h2 class="mb-2 h6 font-weight-bold">
+                    <a class="text-dark" href="{{site.baseurl}}{{second_post.url}}">{{ second_post.title }}</a>
+                </h2>
+
+                <small class="text-muted">
+                    {{ second_post.date | date: '%b %d, %Y' }}
+                </small>
+            </div>
+        </div>
+
+        <!-- third latest post -->
+        {%- assign third_post = site.posts[2] -%}
+        <div class="mb-3 d-flex align-items-center pb-4 pt-3" style="border-bottom: 1px solid rgba(0, 0, 0, .125);">
+            {% if third_post.image %}
+            <div class="col-md-4">
+                <a href="{{site.baseurl}}{{third_post.url}}">
+                    <img class="w-100" src="{% if third_post.image contains " ://" %}{{ third_post.image }}{% else
+                        %}{{site.baseurl}}/{{ third_post.image }}{% endif %}" alt="{{ third_post.title }}">
+                </a>
+            </div>
+            {% endif %}
+            <div>
+                <small class=" text-gradient-purple-coral">
+                    In <span class="catlist">
+                        {% for category in third_post.categories %}
+                        <a class="text-capitalize text-muted smoothscroll"
+                            href="{{site.baseurl}}/categories.html#{{ category | downcase }}">{{ category }}</a><span
+                            class="">, </span>
+                        {% endfor %}
+                    </span>
+                </small>
+                <h2 class="mb-2 h6 font-weight-bold">
+                    <a class="text-dark" href="{{site.baseurl}}{{third_post.url}}">{{ third_post.title }}</a>
+                </h2>
+
+                <small class="text-muted">
+                    {{ third_post.date | date: '%b %d, %Y' }}
+                </small>
+            </div>
+        </div>
+
+        <!-- fourth latest post -->
+        {%- assign fourth_post = site.posts[3] -%}
+        <div class="mb-3 d-flex align-items-center pb-4 pt-3" style="border-bottom: 1px solid rgba(0, 0, 0, .125);">
+            {% if fourth_post.image %}
+            <div class="col-md-4">
+                <a href="{{site.baseurl}}{{fourth_post.url}}">
+                    <img class="w-100" src="{% if fourth_post.image contains " ://" %}{{ fourth_post.image }}{% else
+                        %}{{site.baseurl}}/{{ fourth_post.image }}{% endif %}" alt="{{ fourth_post.title }}">
+                </a>
+            </div>
+            {% endif %}
+            <div>
+                <small class=" text-gradient-purple-coral">
+                    In <span class="catlist">
+                        {% for category in fourth_post.categories %}
+                        <a class="text-capitalize text-muted smoothscroll"
+                            href="{{site.baseurl}}/categories.html#{{ category | downcase }}">{{ category }}</a><span
+                            class="">, </span>
+                        {% endfor %}
+                    </span>
+                </small>
+                <h2 class="mb-2 h6 font-weight-bold">
+                    <a class="text-dark" href="{{site.baseurl}}{{fourth_post.url}}">{{ fourth_post.title }}</a>
+                </h2>
+
+                <small class="text-muted">
+                    {{ fourth_post.date | date: '%b %d, %Y' }}
+                </small>
+            </div>
+        </div>
+
+    </div>
+
 </div>
-<!-- end post -->
